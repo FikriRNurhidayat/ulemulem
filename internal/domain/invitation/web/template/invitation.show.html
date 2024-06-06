@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <title>Wedding Invitation</title>
+  </head>
+
+  <body>
+    <main class="m">
+      <div class="m__hosting-line">
+        <p>
+          Mr. and Mrs. Vito Corleone<br />request the honor of your presence<br />at
+          the marriage of their daughter
+        </p>
+      </div>
+      <div class="m__names">
+        <h1>{{.Groom}}</h1>
+        <p>to</p>
+        <h1>{{.Bride}}</h1>
+      </div>
+      <div class="m__date-and-time">
+        <p>{{.Date}}<br />{{.Year}}<br />{{.Time}}</p>
+      </div>
+      <div class="m__ceremony-location">
+        <p class="m__ceremony-location-name">{{.LocationName}}</p>
+        <p class="m__ceremony-location-address">{{.LocationAddress}}</p>
+      </div>
+      <div class="m__reception-indicator">
+        <small>reception to follow</small>
+      </div>
+    </main>
+  </body>
+</html>
