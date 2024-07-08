@@ -1,6 +1,8 @@
 package http_server
 
 import (
+	"strings"
+
 	"github.com/fikrirnurhidayat/dhasar"
 	"github.com/fikrirnurhidayat/ulemulem/internal/domain/invitation"
 	"github.com/fikrirnurhidayat/x/logger"
@@ -39,11 +41,22 @@ func New() (*dhasar.HTTPServer, error) {
 		},
 	})
 
+	cors := viper.GetString("server.cors")
+
 	srv.Echo.Use(middleware.CORSWithConfig(middleware.CORSConfig{
-    AllowOrigins: []string{"http://localhost:5173"},
+		AllowOrigins: strings.Split(cors, ";"),
 		AllowHeaders: []string{echo.HeaderOrigin, echo.HeaderContentType, echo.HeaderAccept},
 	}))
-	srv.Echo.Static("/assets", "/home/fain/Codes/ulemulem/assets")
+
+	srv.Echo.Use(middleware.StaticWithConfig(middleware.StaticConfig{
+		Skipper:    nil,
+		Root:       viper.GetString("server.webdir"),
+		Index:      "index.html",
+		HTML5:      true,
+		Browse:     false,
+		IgnoreBase: false,
+		Filesystem: nil,
+	}))
 
 	return srv, err
 }

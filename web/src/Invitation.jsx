@@ -38,7 +38,7 @@ export default function Invitation() {
     return `#${id}`;
   }, []);
 
-  const apiUrl = useMemo(() => import.meta.env.VITE_ULEMULEM_API_URL || "", []);
+  const apiUrl = useMemo(() => import.meta.env.VITE_ULEMULEM_API_URL || window.location.origin, [window.location.origin]);
   const endpointUrl = useMemo(() => {
     const endpointUrl = new URL(`${apiUrl}/v1/invitations`);
 

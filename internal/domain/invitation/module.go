@@ -30,16 +30,12 @@ func WireHTTPModule(container *dhasar.Container) error {
 	container.Register("MakeInvitationService", createInvitationService)
 
 	invitationRestController := invitation_controller.NewInvitationRestController()
-	invitationWebController := invitation_controller.NewInvitationWebController()
 
 	invitationRestController.WithGetInvitationService(getInvitationService)
 	invitationRestController.WithGetInvitationsService(getInvitationsService)
 	invitationRestController.WithCreateInvitationService(createInvitationService)
 
-	invitationWebController.WithGetInvitationService(getInvitationService)
-
 	invitationRestController.Register(dhasar.GetDep[*echo.Echo](container, "Echo"))
-	invitationWebController.Register(dhasar.GetDep[*echo.Echo](container, "Echo"))
 
 	return nil
 }

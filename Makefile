@@ -9,15 +9,15 @@ DATABASE_URL=postgres://${DATABASE_USER}:${DATABASE_PASSWORD}@${DATABASE_HOST}:$
 
 .PHONY: migratedb
 migratedb:
-	migrate --path=db/postgres/migrations/ \
+	migrate --path=db/migrations/ \
 			--database ${DATABASE_URL} up
 
 .PHONY: rollbackdb
 rollbackdb:
-	echo "y" | migrate --path=db/postgres/migrations/ \
+	echo "y" | migrate --path=db/migrations/ \
 			--database ${DATABASE_URL} down
 
 migration:
 	$(eval timestamp := $(shell date +%s))
-	touch db/postgres/migrations/$(timestamp)_${name}.up.sql
-	touch db/postgres/migrations/$(timestamp)_${name}.down.sql
+	touch db/migrations/$(timestamp)_${name}.up.sql
+	touch db/migrations/$(timestamp)_${name}.down.sql
